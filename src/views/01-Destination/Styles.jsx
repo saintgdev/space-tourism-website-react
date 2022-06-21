@@ -1,33 +1,32 @@
 import styled from 'styled-components'
 
 export const DStyles = styled.main`
+  margin-top: 1.5em;
   padding: 0 1.5em;
   text-align: center;
-  h1{
-    text-transform: uppercase;
-    letter-spacing: var(--ls-barlow-2);
-    font-family: var(--font-barlow-2);
-    font-size: 1em;
-    font-weight: 400;
-    span{
-      opacity: .25;
-    }
-  }
   .Destination-preview{
     width: 10.6250em;
     height: 10.6250em;
-    margin: 0 auto;
-    overflow: hidden;
+    margin: 2em auto 1.6250em;
     display: flex;
     justify-content: center;
     &__container{
-      display: grid;
-      transition: transform .6s;
-      grid-template-columns: repeat(4, 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
     }
     &__img{
       width: 100%;
       height: 100%;
+      opacity: 0;
+      z-index: auto;
+      transition: opacity .6s;
+      &:not(:first-child){
+        width: 100%;
+        height: 100%;
+        position: absolute;
+      }
     }
   }
   .Destination-select{
@@ -60,6 +59,50 @@ export const DStyles = styled.main`
         transform: scaleX(1);
       }
 
+    }
+  }
+
+
+
+
+  .Destination-info{
+    &__title{
+      text-transform: uppercase;
+      font-weight: normal;
+      margin: 0.3571em 0 0.0714em;
+      line-height: 1;
+      font-family: var(--font-bellefair);
+      font-size: 3.5em; //56px
+    }
+    &__desc{
+      margin: 0;
+      font-family: var(--font-barlow);
+      font-size: 0.9375em; //15px
+      line-height: 1.6666em;
+    }
+  }
+
+  .Destination-data{
+    padding-top: 2em;
+    padding-bottom: 3.625em;
+    margin-top: 2.1875em;
+    border-top: 0.0625em solid #383B4B;
+    display: grid;
+    row-gap: 2em;
+    &__item{
+      display: grid;
+      justify-content: center;
+      text-transform: uppercase;
+    }
+    &__title{
+      letter-spacing: var(--ls-barlow-2);
+      font-family: var(--font-barlow-2);
+      font-size: 0.8750em; //14px
+    }
+    &__desc{
+      margin-top: 0.4285em;
+      font-family: var(--font-bellefair);
+      font-size: 1.75em;  //28px
     }
   }
   

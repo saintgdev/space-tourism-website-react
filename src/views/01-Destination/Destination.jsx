@@ -1,4 +1,6 @@
+
 import { useRef, useState } from 'react'
+import PageTitle from '../../components/PageTitle'
 import { destinationData } from '../../helpers/getPagesData'
 import { DStyles } from './Styles'
 
@@ -17,23 +19,29 @@ const destinySelect = (event, destiny, setDestiny, sliderContainer) => {
         setDestiny(destiny = allItems.indexOf(item))
       }
     })
-    if (destiny > 0) {
-      sliderContainer.current.style.transform = `translateX(-${destiny}00%)`
-    } else {
-      sliderContainer.current.style.transform = `translateX(0%)`
-    }
   }
 }
+
+async function imagePlanet(index, slider) {
+
+  const allImg = await Array.from(slider.children)
+  allImg.map(image => image.style.opacity = '0')
+  allImg[index].style.opacity = '1'
+}
+
+
 
 
 function Destination() {
   const [destiny, setDestiny] = useState(0)
-  const sliderContainer = useRef()
+  const sliderContainer = useRef(null)
+
+  imagePlanet(destiny, sliderContainer.current)
 
   return (
     <DStyles>
       <section>
-        <h1><span>{`0 ${destiny + 1}`}</span> Pick your destination</h1>
+        <PageTitle pageId='01'>Pick your destination</PageTitle>
         <div className='Destination-preview'>
           <div className='Destination-preview__container' ref={sliderContainer}>
             {
@@ -49,11 +57,20 @@ function Destination() {
           <span className='Destination-select__item'>Europa</span>
           <span className='Destination-select__item'>Titan</span>
         </nav>
-        <h1>
-          {
-            destinationData[destiny].name
-          }
-        </h1>
+        <article className='Destination-info'>
+          <h2 className='Destination-info__title'>{destinationData[destiny].name}</h2>
+          <p className='Destination-info__desc'>{destinationData[destiny].description}</p>
+          <div className='Destination-data'>
+            <div className='Destination-data__item'>
+              <span className='Destination-data__title'>Avg. distance</span>
+              <span className='Destination-data__desc'>{destinationData[destiny].distance}</span>
+            </div>
+            <div className='Destination-data__item'>
+              <span className='Destination-data__title'>Est. travel time</span>
+              <span className='Destination-data__desc'>{destinationData[destiny].travel}</span>
+            </div>
+          </div>
+        </article>
       </section>
     </DStyles>
   )
