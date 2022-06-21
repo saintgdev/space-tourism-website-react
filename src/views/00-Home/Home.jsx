@@ -15,9 +15,6 @@ function Home() {
       <div className='Home-explore'>
         <button className='Home-explore__btn'>Explore</button>
       </div>
-      <div className='Home-background'>
-        <img src="/assets/home/background-home-mobile.jpg" alt="background home" className='Home-background__img' />
-      </div>
     </HStyles>
   )
 }

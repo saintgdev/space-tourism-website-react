@@ -42,23 +42,7 @@ export const HStyles = styled.main`
       font-family: var(--font-bellefair);
       font-size: 1.25em;
       color: var(--color-dark-rift);
-      background-color: var(--color-white);
-    }
-  }
-  .Home-background{
-    content: '';
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: -2;
-    background-color: red;
-    &__img{
-      width: 100%;
-      height: 100%;
+      background-color: white;
     }
   }
 `
-
-// url('/assets/home/background-home-mobile.jpg')
