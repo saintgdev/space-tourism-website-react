@@ -9,6 +9,8 @@ const GlobalStyles = createGlobalStyle`
     --font-barlow-2: 'Barlow Condensed', sans-serif;
     --font-bellefair: 'Bellefair', sans-serif;
     --ls-barlow-2: 0.16875em;
+
+    --pd-pages: 1.5em;
   }
   *,
   *::before,

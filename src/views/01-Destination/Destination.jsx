@@ -1,76 +1,56 @@
-
-import { useRef, useState } from 'react'
-import PageTitle from '../../components/PageTitle'
+import { useRef } from 'react'
+import { useInfo } from '../../hooks/useInfo'
 import { destinationData } from '../../helpers/getPagesData'
+import PageTitle from '../../components/PageTitle'
 import { DStyles } from './Styles'
 
 
-const destinySelect = (event, destiny, setDestiny, sliderContainer) => {
-  if (event.target.classList.contains('Destination-select__item')) {
-    const allItems = Array.from(event.target.parentElement.children)
-    allItems.map(item => {
-      if (item.classList.contains('active')) {
-        item.classList.remove('active')
-      }
-    })
-    event.target.classList.add('active')
-    allItems.filter(item => {
-      if (item.classList.contains('active')) {
-        setDestiny(destiny = allItems.indexOf(item))
-      }
-    })
-  }
-}
-
-async function imagePlanet(index, slider) {
-
-  const allImg = await Array.from(slider.children)
-  allImg.map(image => image.style.opacity = '0')
-  allImg[index].style.opacity = '1'
-}
-
-
-
-
 function Destination() {
-  const [destiny, setDestiny] = useState(0)
-  const sliderContainer = useRef(null)
-
-  imagePlanet(destiny, sliderContainer.current)
+  const allItems = useRef()
+  const { infoIndex, setActiveTab } = useInfo(allItems)
 
   return (
     <DStyles>
       <section>
         <PageTitle pageId='01'>Pick your destination</PageTitle>
-        <div className='Destination-preview'>
-          <div className='Destination-preview__container' ref={sliderContainer}>
-            {
-              destinationData.map(data => <img src={data.images.png} alt={data.name} className='Destination-preview__img' />)
-            }
-          </div>
+        <div className='Destination-preview' ref={allItems}>
+          {
+            destinationData.map(data => (
+              <img
+                src={data.images.png}
+                alt={data.name}
+                className='Destination-preview__img'
+              />
+            ))
+          }
         </div>
       </section>
       <section>
-        <nav className='Destination-select' onClick={(e) => destinySelect(e, destiny, setDestiny, sliderContainer)}>
-          <span className='Destination-select__item active'>Moon</span>
-          <span className='Destination-select__item'>Mars</span>
-          <span className='Destination-select__item'>Europa</span>
-          <span className='Destination-select__item'>Titan</span>
+        <nav
+          className='Destination-tabs'
+          onClick={(even) => setActiveTab(even, 'Destination-tabs__item')}
+        >
+          <span className='Destination-tabs__item show'>Moon</span>
+          <span className='Destination-tabs__item'>Mars</span>
+          <span className='Destination-tabs__item'>Europa</span>
+          <span className='Destination-tabs__item'>Titan</span>
         </nav>
+
         <article className='Destination-info'>
-          <h2 className='Destination-info__title'>{destinationData[destiny].name}</h2>
-          <p className='Destination-info__desc'>{destinationData[destiny].description}</p>
+          <h2 className='Destination-info__title'>{destinationData[infoIndex].name}</h2>
+          <p className='Destination-info__desc'>{destinationData[infoIndex].description}</p>
           <div className='Destination-data'>
             <div className='Destination-data__item'>
               <span className='Destination-data__title'>Avg. distance</span>
-              <span className='Destination-data__desc'>{destinationData[destiny].distance}</span>
+              <span className='Destination-data__desc'>{destinationData[infoIndex].distance}</span>
             </div>
             <div className='Destination-data__item'>
               <span className='Destination-data__title'>Est. travel time</span>
-              <span className='Destination-data__desc'>{destinationData[destiny].travel}</span>
+              <span className='Destination-data__desc'>{destinationData[infoIndex].travel}</span>
             </div>
           </div>
         </article>
+
       </section>
     </DStyles>
   )

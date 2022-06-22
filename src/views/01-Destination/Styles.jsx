@@ -2,43 +2,39 @@ import styled from 'styled-components'
 
 export const DStyles = styled.main`
   margin-top: 1.5em;
-  padding: 0 1.5em;
+  padding: 0 var(--pd-pages);
   text-align: center;
   .Destination-preview{
     width: 10.6250em;
     height: 10.6250em;
     margin: 2em auto 1.6250em;
     display: flex;
+    align-items: center;
     justify-content: center;
-    &__container{
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-    }
+    position: relative;
     &__img{
       width: 100%;
       height: 100%;
       opacity: 0;
-      z-index: auto;
       transition: opacity .6s;
       &:not(:first-child){
-        width: 100%;
-        height: 100%;
         position: absolute;
       }
     }
   }
-  .Destination-select{
-    text-transform: uppercase;
-    letter-spacing: var(--ls-barlow-2);
-    font-family: var(--font-barlow-2);
-    font-size: 0.875em;
+
+
+
+  .Destination-tabs{
     display: flex;
+    column-gap: 1.6875em;
     justify-content: center;
-    column-gap: 1.9285em;
     &__item{
       padding-bottom: 0.5714em;
+      text-transform: uppercase;
+      letter-spacing: var(--ls-barlow-2);
+      font-family: var(--font-barlow-2);
+      font-size: 0.875em;
       position: relative;
       &::after{
         content: '';
@@ -53,7 +49,7 @@ export const DStyles = styled.main`
         background-color: var(--color-white);
       }
     }
-    .active{
+    .show{
       &::after{
         opacity: 1;
         transform: scaleX(1);
